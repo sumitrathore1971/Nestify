@@ -1,0 +1,146 @@
+<style>
+  .home {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #ffffff 0%, #fee2e2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    /* position: relative; */
+    /* overflow: hidden; */
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .header h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #dc2626;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .header p {
+    font-size: 1.5rem;
+    color: #4b5563;
+    max-width: 600px;
+    line-height: 1.6;
+    margin: 0 auto;
+  }
+  .explore-btn {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 20px 40px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+    min-width: 200px;
+    outline: none;
+    margin-bottom: 30px;
+    transform: scale(1);
+  }
+  .explore-btn:disabled {
+    background-color: #991b1b;
+    cursor: not-allowed;
+    transform: scale(0.95);
+  }
+  .decorative-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .circle1 {
+    top: 20%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+    background: rgba(220, 38, 38, 0.1);
+    animation: float 6s ease-in-out infinite;
+  }
+  .circle2 {
+    bottom: 20%;
+    right: 15%;
+    width: 150px;
+    height: 150px;
+    background: rgba(220, 38, 38, 0.05);
+    animation: float 8s ease-in-out infinite reverse;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  @media (max-width: 768px) {
+    .header h1 {
+      font-size: 3rem !important;
+    }
+    .header p {
+      font-size: 1.2rem !important;
+    }
+    .explore-btn {
+      padding: 15px 30px !important;
+      font-size: 1.1rem !important;
+    }
+  }
+</style>
+<div class="home">
+  <div class="header">
+    <h1>Nestify</h1>
+    <p>Find your perfect nest away from home</p>
+  </div>
+
+  <button class="explore-btn" id="exploreBtn">Explore Nestify</button>
+
+  <div class="decorative-circle circle1"></div>
+  <div class="decorative-circle circle2"></div>
+</div>
+
+<script>
+  const btn = document.getElementById("exploreBtn");
+  let isExploring = false;
+
+  btn.addEventListener("click", function () {
+    if (isExploring) return;
+    isExploring = true;
+    btn.disabled = true;
+    btn.textContent = "Exploring...";
+    console.log("Exploring Nestify...");
+    setTimeout(() => {
+      window.location.href = "/listings";
+      isExploring = false;
+      btn.disabled = false;
+      btn.textContent = "Explore Nestify";
+    }, 2000);
+  });
+
+  btn.addEventListener("mouseenter", function () {
+    if (!isExploring) {
+      btn.style.backgroundColor = "#b91c1c";
+      btn.style.transform = "scale(1.05)";
+      btn.style.boxShadow = "0 15px 30px rgba(220, 38, 38, 0.4)";
+    }
+  });
+  btn.addEventListener("mouseleave", function () {
+    if (!isExploring) {
+      btn.style.backgroundColor = "#dc2626";
+      btn.style.transform = "scale(1)";
+      btn.style.boxShadow = "0 10px 25px rgba(220, 38, 38, 0.3)";
+    }
+  });
+</script>
